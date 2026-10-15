@@ -1,0 +1,85 @@
+/* Estructura general: cabecera fija y área principal. */
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  height: var(--header-height);
+  padding: 0 var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: inherit;
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.brand__logo {
+  font-size: 1.4rem;
+}
+
+.app-nav {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.app-nav a {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  color: var(--color-muted);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.app-nav a[aria-current="page"] {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+.api-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+
+.api-status__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--color-muted);
+}
+
+.api-status[data-state="online"] .api-status__dot {
+  background: var(--color-success);
+}
+
+.api-status[data-state="offline"] .api-status__dot {
+  background: var(--color-danger);
+}
+
+.app-main {
+  height: calc(100% - var(--header-height));
+}
+
+.page-message {
+  max-width: 480px;
+  margin: 15vh auto;
+  text-align: center;
+}
+
+.page-message p {
+  margin-top: var(--space-3);
+  color: var(--color-muted);
+}

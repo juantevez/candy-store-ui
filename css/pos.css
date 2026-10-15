@@ -1,0 +1,361 @@
+/* Pantalla del mostrador: productos a la izquierda, ticket y cobro a la derecha. */
+
+.pos {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 420px;
+  gap: var(--space-4);
+  height: 100%;
+  padding: var(--space-4);
+}
+
+.pos__column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-height: 0;
+}
+
+/* --- Búsqueda y productos -------------------------------------------------- */
+
+.catalog {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: var(--space-4);
+}
+
+.catalog__search {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.catalog__search .input {
+  min-height: 46px;
+  font-size: 1.05rem;
+}
+
+.catalog__hint {
+  margin-bottom: var(--space-2);
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
+
+.product-list {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.product {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-3);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.product:hover:not(:disabled),
+.product:focus-visible {
+  border-color: var(--color-border);
+  background: var(--color-surface-alt);
+}
+
+.product:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.product__name {
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product__meta {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.product__price {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.empty {
+  padding: var(--space-6) var(--space-4);
+  color: var(--color-muted);
+  text-align: center;
+}
+
+/* --- Ticket ----------------------------------------------------------------- */
+
+.ticket {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: var(--space-4);
+}
+
+.ticket__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-3);
+}
+
+.ticket__lines {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.ticket-line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-areas:
+    "name qty total"
+    "detail qty remove";
+  align-items: center;
+  column-gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.ticket-line[data-short="true"] {
+  margin: 0 calc(-1 * var(--space-2));
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--color-danger-soft);
+}
+
+.ticket-line__name {
+  grid-area: name;
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ticket-line__detail {
+  grid-area: detail;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
+
+.ticket-line[data-short="true"] .ticket-line__detail {
+  color: var(--color-danger);
+  font-weight: 600;
+}
+
+.ticket-line__qty {
+  grid-area: qty;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.ticket-line__qty output {
+  min-width: 2ch;
+  font-weight: 700;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.ticket-line__total {
+  grid-area: total;
+  font-weight: 700;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.ticket-line__remove {
+  grid-area: remove;
+  justify-self: end;
+  color: var(--color-muted);
+}
+
+.ticket__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-3);
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Cobro -------------------------------------------------------------------- */
+
+.checkout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.payment-methods {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.payment-methods legend {
+  margin-bottom: var(--space-2);
+}
+
+.payment-method {
+  position: relative;
+}
+
+.payment-method input {
+  position: absolute;
+  opacity: 0;
+}
+
+.payment-method span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.payment-method input:checked + span {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+.payment-method input:focus-visible + span {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.cash {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  align-items: end;
+}
+
+.cash__change {
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.cash__change[data-insufficient="true"] {
+  color: var(--color-danger);
+}
+
+/* --- Últimas ventas ----------------------------------------------------------- */
+
+.recent {
+  padding: var(--space-3) var(--space-4);
+}
+
+.recent summary {
+  cursor: pointer;
+}
+
+.recent__list {
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  max-height: 180px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.recent__item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-1) 0;
+  font-size: 0.85rem;
+}
+
+.recent__time {
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.recent__total {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Resultado de la venta ------------------------------------------------------ */
+
+.receipt__title {
+  margin-bottom: var(--space-1);
+  font-size: 1.3rem;
+}
+
+.receipt__id {
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.receipt__lines {
+  margin: var(--space-4) 0;
+  padding: 0;
+  list-style: none;
+}
+
+.receipt__lines li,
+.receipt__row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-1) 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.receipt__row--total {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-2);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+/* --- Responsive ------------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+  .pos {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .catalog {
+    max-height: 60vh;
+  }
+}

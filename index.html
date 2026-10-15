@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Candy Store</title>
+    <link rel="stylesheet" href="css/index.css" />
+    <script type="module" src="js/index.js"></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <a class="brand" href="#/mostrador">
+        <span class="brand__logo" aria-hidden="true">🍬</span>
+        <span class="brand__name">Candy Store</span>
+      </a>
+      <nav class="app-nav" aria-label="Secciones">
+        <a href="#/mostrador" data-route="/mostrador">Mostrador</a>
+        <a href="#/compra-online" data-route="/compra-online">Compra Online</a>
+      </nav>
+      <p class="api-status" id="api-status" role="status">
+        <span class="api-status__dot" aria-hidden="true"></span>
+        <span class="api-status__text">Conectando…</span>
+      </p>
+    </header>
+
+    <main id="app" class="app-main"></main>
+
+    <div id="toasts" class="toasts" aria-live="polite" aria-atomic="false"></div>
+
+    <noscript>Esta aplicación necesita JavaScript habilitado.</noscript>
+  </body>
+</html>

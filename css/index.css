@@ -1,0 +1,6 @@
+/* Punto de entrada de estilos. Orden: tokens y base → layout → componentes → pantallas. */
+@import url("base.css");
+@import url("layout.css");
+@import url("components.css");
+@import url("pos.css");
+@import url("online.css");
